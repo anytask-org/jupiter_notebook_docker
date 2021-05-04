@@ -17,6 +17,6 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: anytask-org/jupiter_notebook_docker
-        username: ${{ $GITHUB_ACTOR }}
+        username: ${{ GITHUB_ACTOR }}
         password: ${{ secrets.DOCKER_PAT }}
         tag_names: true
