@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - master
+      - stable
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: anytask-org/jupiter_notebook_docker
+        username: ${{ $GITHUB_ACTOR }}
+        password: ${{ secrets.DOCKER_PAT }}
+        tag_names: true
