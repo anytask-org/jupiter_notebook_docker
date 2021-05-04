@@ -19,4 +19,5 @@ jobs:
         name: anytask-org/jupiter_notebook_docker
         username: znick
         password: ${{ secrets.DOCKER_PAT }}
+        registry: ghcr.io
         tag_names: true
