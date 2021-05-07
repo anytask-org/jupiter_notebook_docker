@@ -6,13 +6,12 @@ RUN apt-get install -y python2  python3 python3-pip
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-ADD requirements3.txt /requirements3.txt
+ADD requirements.txt /requirements.txt
+RUN pip3 install --no-cache-dir -r /requirements.txt
 
 ADD get-pip.py /get-pip.py
 RUN python2 /get-pip.py
 RUN python2 -m pip install --no-cache-dir ipykernel
-
-RUN pip3 install --no-cache-dir -r /requirements3.txt
 
 RUN adduser --disabled-password jupyter
 RUN mkdir -p /home/jupyter/.jupyter
