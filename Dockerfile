@@ -1,8 +1,8 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.10
 LABEL org.opencontainers.image.source https://github.com/anytask-org/jupiter_notebook_docker
 
 RUN apt-get update
-RUN apt-get install -y python2  python3 python3-pip
+RUN apt-get install -y python2  python3 python3-pip coreutils
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -16,12 +16,15 @@ RUN python2 -m pip install --no-cache-dir ipykernel
 RUN adduser --disabled-password jupyter
 RUN mkdir -p /home/jupyter/.jupyter
 ADD jupyter_notebook_config.py /home/jupyter/.jupyter/
+ADD gatekeeper.py /home/jupyter/
+ADD run.sh /home/jupyter/
 RUN chown -R jupyter:jupyter ~jupyter
 
 RUN mkdir /notebooks
 RUN chown -R jupyter:jupyter /notebooks
 
+EXPOSE 5555
 EXPOSE 8888
 
-# Start uWSGI
-CMD ["su", "--", "jupyter", "-c", "jupyter notebook"]
+WORKDIR /home/jupyter/
+CMD ["su", "--", "jupyter", "-c", "./run.sh"]
