@@ -19,7 +19,7 @@ SALT = os.environ["SALT"]
 DST_URL_PREFIX = "https://ipython.anytask.org"
 ABSOLUTE_URL_PREFIX = "https://anytask.org/"
 URL_PREFIXES_WHITELIST = [ABSOLUTE_URL_PREFIX, "https://www.anytask.org/", "https://storage.yandexcloud.net/anytask/"]
-DOWNLOADED_FILES_TTL = datetime.timedelta(days=7)
+DOWNLOADED_FILES_TTL = datetime.timedelta(days=30)
 DEBUG = os.environ.get("DEBUG", False)
 
 
@@ -47,10 +47,11 @@ class Handler(BaseHTTPRequestHandler):
     @staticmethod
     def cleanup(dst_dir):
         if not os.path.exists(dst_dir):
+            logging.error("Directory to cleanup not found! : '%s'", dst_dir)
             return
 
         now = datetime.datetime.now()
-        deadline = now + DOWNLOADED_FILES_TTL
+        deadline = now - DOWNLOADED_FILES_TTL
 
         for f in os.listdir(dst_dir):
             if f.startswith("."):
@@ -62,6 +63,7 @@ class Handler(BaseHTTPRequestHandler):
 
             ctime = datetime.datetime.fromtimestamp(os.path.getmtime(path))
             if ctime > deadline:
+                logging.info("rmtree path:%s, deadline:%s, ctime:%s", path, deadline, ctime)
                 shutil.rmtree(path, ignore_errors=True)
 
 
