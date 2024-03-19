@@ -2,7 +2,7 @@ FROM ubuntu:mantic
 LABEL org.opencontainers.image.source https://github.com/anytask-org/jupiter_notebook_docker
 
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip coreutils curl && \
+    apt-get install -y python3 python3-pip coreutils curl git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
