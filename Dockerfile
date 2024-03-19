@@ -1,4 +1,4 @@
-FROM ubuntu:22.10
+FROM ubuntu:jammy
 LABEL org.opencontainers.image.source https://github.com/anytask-org/jupiter_notebook_docker
 
 RUN apt-get update
