@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:mantic
 LABEL org.opencontainers.image.source https://github.com/anytask-org/jupiter_notebook_docker
 
 RUN apt-get update
