@@ -1,10 +1,14 @@
 FROM ubuntu:mantic
 LABEL org.opencontainers.image.source https://github.com/anytask-org/jupiter_notebook_docker
 
-RUN apt-get update
-RUN apt-get install -y python2  python3 python3-pip coreutils
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip coreutils curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl https://pyenv.run | bash
+RUN pyenv update
+RUN pyenv install 2.7.18
 
 ADD requirements.txt /requirements.txt
 RUN pip3 install --no-cache-dir -r /requirements.txt
