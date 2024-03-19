@@ -18,7 +18,7 @@ DOWNLOAD_PATH = os.environ.get("DOWNLOAD_PATH", "/notebooks")
 SALT = os.environ["SALT"]
 DST_URL_PREFIX = "https://ipython.anytask.org"
 ABSOLUTE_URL_PREFIX = "https://anytask.org/"
-URL_PREFIXES_WHITELIST = [ABSOLUTE_URL_PREFIX, "https://www.anytask.org/", "https://storage.yandexcloud.net/anytask/"]
+URL_PREFIXES_WHITELIST = [ABSOLUTE_URL_PREFIX, "https://www.anytask.org/", "https://storage.yandexcloud.net/anytask-ng/"]
 DOWNLOADED_FILES_TTL = datetime.timedelta(days=30)
 DEBUG = os.environ.get("DEBUG", False)
 
