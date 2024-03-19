@@ -7,6 +7,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl https://pyenv.run | bash
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 RUN pyenv update
 RUN pyenv install 2.7.18
 
