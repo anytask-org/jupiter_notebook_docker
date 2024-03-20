@@ -1,9 +1,9 @@
-FROM ubuntu:mantic
+FROM ubuntu:jammy
 LABEL org.opencontainers.image.source https://github.com/anytask-org/jupiter_notebook_docker
 
 RUN apt-get update && \
     apt-get install -y coreutils curl git xz-utils tar && \
-    apt-get install -y build-essential libncursesw5-dev libreadline-gplv2-dev libssl-dev libgdbm-dev libc6-dev libsqlite3-dev libbz2-dev libffi-dev && \
+    apt-get install -y build-essential libncursesw5-dev libssl-dev libgdbm-dev libc6-dev libsqlite3-dev libbz2-dev libffi-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
